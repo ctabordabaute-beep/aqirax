@@ -26,7 +26,6 @@
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* LOADER CON ESTRELLAS */
         .preloader {
             position: fixed;
             top: 0;
@@ -94,8 +93,6 @@
             width: 10px; height: 10px; background: white; border-radius: 50%;
             animation: bounceDot 0.8s infinite alternate;
         }
-        .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
         @keyframes bounceDot {
             0% { transform: translateY(0px); opacity: 0.3; }
             100% { transform: translateY(-12px); opacity: 1; }
@@ -123,7 +120,6 @@
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
         }
-        /* HEADER */
         .header {
             position: fixed;
             top: 0;
@@ -142,37 +138,35 @@
         }
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
         .logo-img-small { width: 35px; height: 35px; object-fit: contain; }
-        .header-actions { display: flex; align-items: center; gap: 1rem; }
-        .settings-icon {
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
+        .admin-icon, .settings-icon {
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.15);
             width: 42px; height: 42px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: all 0.2s; font-size: 1.2rem; color: white;
         }
-        .settings-icon:hover { background: rgba(255,255,255,0.18); transform: scale(1.02); }
+        .admin-icon:hover, .settings-icon:hover { background: rgba(255,255,255,0.18); transform: scale(1.02); }
         .user-info-header {
             display: flex; align-items: center; gap: 8px;
             background: rgba(255,255,255,0.05);
             padding: 0.3rem 0.8rem; border-radius: 40px; font-size: 0.8rem;
         }
-        .user-info-header.vip {
-            background: linear-gradient(135deg, #ffd70033, #ffa50033);
-            border: 1px solid #ffd700;
-            color: #ffd700;
-        }
-        /* PREFERENCIAS */
-        .preferences-menu {
-            position: fixed; top: 70px; right: 20px; width: 380px;
+        .user-info-header.vip { background: linear-gradient(135deg, #ffd70033, #ffa50033); border: 1px solid #ffd700; color: #ffd700; }
+        .user-info-header.programador { background: linear-gradient(135deg, #ff69b433, #ff149333); border: 1px solid #ff69b4; color: #ff69b4; }
+        .user-info-header.both { background: linear-gradient(135deg, #ffd70033, #ff69b433); border: 1px solid #ffd700; color: #ffd700; }
+        
+        .preferences-menu, .admin-menu {
+            position: fixed; top: 70px; right: 20px; width: 420px;
             max-width: calc(100vw - 40px);
             background: rgba(15,15,20,0.98); backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 20px;
-            z-index: 1150; transform: translateX(400px);
+            z-index: 1150; transform: translateX(440px);
             transition: transform 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
             padding: 1.2rem; max-height: 80vh; overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .preferences-menu.open { transform: translateX(0); }
+        .preferences-menu.open, .admin-menu.open { transform: translateX(0); }
         .pref-section { margin-bottom: 1.5rem; }
         .pref-section label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: #aaa; }
         .pref-section textarea {
@@ -186,7 +180,25 @@
         .color-opt.selected { border-color: white; transform: scale(1.05); }
         .pref-actions { display: flex; gap: 0.8rem; margin-top: 1rem; }
         .pref-actions button { flex: 1; background: rgba(255,255,255,0.1); border: none; padding: 0.6rem; border-radius: 30px; color: white; cursor: pointer; }
-        /* SIDEBAR */
+        
+        .user-list-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .user-email-admin { font-size: 0.75rem; color: #ffd966; word-break: break-all; font-family: monospace; }
+        .user-rank-badges { display: flex; gap: 0.5rem; margin: 0.5rem 0; flex-wrap: wrap; }
+        .rank-badge { padding: 2px 8px; border-radius: 20px; font-size: 0.65rem; }
+        .rank-badge.vip { background: #ffd700; color: #000; }
+        .rank-badge.programador { background: #ff69b4; color: #000; }
+        .admin-buttons { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+        .admin-buttons button { background: rgba(255,255,255,0.1); border: none; padding: 4px 10px; border-radius: 20px; color: white; cursor: pointer; font-size: 0.7rem; }
+        .admin-buttons button:hover { background: rgba(255,255,255,0.3); }
+        .db-controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; justify-content: center; }
+        .db-btn { background: rgba(255,255,255,0.1); border: none; padding: 8px 12px; border-radius: 20px; color: white; cursor: pointer; font-size: 0.75rem; }
+        .db-btn:hover { background: rgba(255,255,255,0.2); }
+        
         .sidebar-premium {
             position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
             background: rgba(8,8,12,0.96); backdrop-filter: blur(18px);
@@ -206,8 +218,13 @@
         .user-details { flex: 1; }
         .user-name { font-weight: 600; font-size: 0.85rem; }
         .user-email { font-size: 0.65rem; color: #aaa; }
-        .user-rank { font-size: 0.7rem; margin-top: 4px; display: inline-block; padding: 2px 8px; border-radius: 20px; background: rgba(255,255,255,0.1); }
+        .user-rank {
+            font-size: 0.7rem; margin-top: 4px; display: inline-block;
+            padding: 2px 8px; border-radius: 20px; background: rgba(255,255,255,0.1);
+        }
         .user-rank.vip { background: linear-gradient(135deg, #ffd700, #ffa500); color: #000; font-weight: bold; }
+        .user-rank.programador { background: linear-gradient(135deg, #ff69b4, #ff1493); color: #fff; font-weight: bold; }
+        .user-rank.both { background: linear-gradient(135deg, #ffd700, #ff69b4); color: #000; font-weight: bold; }
         .login-btn, .logout-btn {
             width: 100%; background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.15);
@@ -225,13 +242,13 @@
         .nav-item i { width: 24px; font-size: 1.1rem; }
         .nav-item:hover { background: rgba(255,255,255,0.08); transform: translateX(5px); color: white; }
         .special-buttons { margin-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.8rem; }
-        .vip-btn, .support-btn {
+        .planes-btn, .support-btn {
             display: flex; align-items: center; gap: 0.8rem;
             padding: 0.7rem 1rem; margin: 0.3rem 0;
             border-radius: 14px; font-weight: 600;
             cursor: pointer; transition: all 0.25s; font-size: 0.85rem;
         }
-        .vip-btn { background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border: 1px solid rgba(255,215,0,0.3); color: #ffd966; }
+        .planes-btn { background: linear-gradient(135deg, #2a2a2a, #1a1a1a); border: 1px solid rgba(255,215,0,0.3); color: #ffd966; }
         .support-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
         .support-email { font-size: 0.65rem; color: #888; text-align: center; margin-top: 0.5rem; padding: 0.3rem; }
         .sidebar-footer { margin-top: auto; font-size: 0.65rem; text-align: center; padding: 1rem 0 0.3rem; color: #6a6a6a; }
@@ -245,7 +262,7 @@
         }
         .main-area { flex: 1; margin-left: 0; transition: margin-left 0.4s; width: 100%; min-height: 100vh; display: flex; flex-direction: column; background: radial-gradient(circle at 20% 30%, #0a0a0a, #000000); margin-top: 65px; }
         .chat-window { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; max-height: calc(100vh - 140px); scroll-behavior: smooth; }
-        /* Welcome Screen con luz titilante */
+        
         .welcome-screen {
             display: flex;
             flex-direction: column;
@@ -258,20 +275,21 @@
         }
         .welcome-glow {
             position: absolute;
-            top: -80px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 350px;
-            height: 250px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            width: 400px;
+            height: 300px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%;
-            filter: blur(25px);
+            filter: blur(30px);
             animation: flickerLight 2.5s infinite;
             pointer-events: none;
+            z-index: 0;
         }
         @keyframes flickerLight {
             0%, 100% { opacity: 0.2; transform: translateX(-50%) scale(1); }
-            50% { opacity: 0.6; transform: translateX(-50%) scale(1.15); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.2); }
         }
         .welcome-logo {
             width: 130px;
@@ -282,11 +300,11 @@
             position: relative;
             z-index: 1;
         }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.05); opacity: 1; } }
         .welcome-title { font-size: 2.2rem; font-weight: 600; background: linear-gradient(145deg, #ffffff, #b0b0b0); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 0.8rem; position: relative; z-index: 1; }
         .welcome-subtitle { font-size: 1rem; color: #aaa; position: relative; z-index: 1; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        /* Mensajes */
+        
         .msg { display: flex; gap: 10px; max-width: 90%; animation: floatIn 0.4s; }
         @keyframes floatIn { from { opacity: 0; transform: translateY(15px);} to { opacity: 1; transform: translateY(0);} }
         .msg.user { align-self: flex-end; flex-direction: row-reverse; }
@@ -310,16 +328,56 @@
         .input-zone button:hover { background: #26262e; transform: scale(1.02); }
         .stop-btn { background: #4a1a1a !important; border-color: #8b3a3a !important; }
         .input-footer { text-align: center; font-size: 0.65rem; color: #666; padding: 0.5rem 0 0.2rem; }
-        /* Modales */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: all 0.3s; }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s;
+        }
         .modal.active { visibility: visible; opacity: 1; }
-        .modal-card { background: #111; border: 1px solid #2c2c2c; border-radius: 24px; padding: 1.5rem; width: 90%; max-width: 380px; }
-        .modal-card input { width: 100%; background: #1e1e1e; border: 1px solid #3a3a3a; padding: 12px; border-radius: 30px; margin-bottom: 0.8rem; color: white; }
-        .modal-card button { width: 100%; background: white; color: black; border: none; padding: 12px; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .modal-card {
+            background: #111;
+            border: 1px solid #2c2c2c;
+            border-radius: 24px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 400px;
+        }
+        .modal-card h3 { margin-bottom: 1rem; text-align: center; }
+        .modal-card input {
+            width: 100%; background: #1e1e1e; border: 1px solid #3a3a3a;
+            padding: 12px; border-radius: 30px; margin-bottom: 0.8rem; color: white;
+        }
+        .modal-card button {
+            width: 100%; background: white; color: black; border: none;
+            padding: 12px; border-radius: 30px; font-weight: bold; cursor: pointer;
+        }
         .close-modal { text-align: center; margin-top: 10px; color: #aaa; cursor: pointer; }
+        .plan-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .plan-card.vip { border: 1px solid #ffd700; background: linear-gradient(135deg, #ffd70011, #ffa50011); }
+        .plan-card.programador { border: 1px solid #ff69b4; background: linear-gradient(135deg, #ff69b411, #ff149311); }
+        .plan-price { font-size: 1.5rem; font-weight: bold; margin: 0.5rem 0; }
         .chat-item { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 0.8rem; margin-bottom: 0.6rem; cursor: pointer; }
         .chat-date { font-size: 0.65rem; color: #ffd966; }
         .chat-preview { font-size: 0.8rem; color: #ccc; }
+
         @media (min-width: 768px) { .sidebar-premium { width: 300px; } .msg { max-width: 75%; } .menu-trigger { top: 18px; left: 18px; width: 44px; height: 44px; } }
         ::-webkit-scrollbar { width: 3px; }
         ::-webkit-scrollbar-track { background: #0c0c0c; }
@@ -335,7 +393,7 @@
     </div>
     <div class="loader-text">AQIRAX AI</div>
     <div class="loader-dots"><span></span><span></span><span></span></div>
-    <div style="font-size:0.7rem; color:#777;">iniciando consciencia digital...</div>
+    <div style="font-size:0.7rem; color:#777;">iniciando...</div>
 </div>
 <div id="shootingStars" class="shooting-star"></div>
 
@@ -343,11 +401,13 @@
     <a href="#" class="logo"><img src="logo.png" alt="Aqirax" class="logo-img-small" onerror="this.style.display='none'"></a>
     <div class="header-actions">
         <div class="user-info-header" id="userInfoHeader"><i class="fas fa-user-circle"></i><span id="headerUserName">Invitado</span></div>
+        <div id="adminIcon" class="admin-icon" style="display:none;"><i class="fas fa-robot"></i></div>
         <div class="settings-icon" id="settingsBtn"><i class="fas fa-cog"></i></div>
     </div>
 </header>
 
 <div id="preferencesMenu" class="preferences-menu"><h3><i class="fas fa-sliders-h"></i> Preferencias</h3><div id="prefContent"></div></div>
+<div id="adminMenu" class="admin-menu"><h3><i class="fas fa-users"></i> Panel de Administración</h3><div id="adminContent"></div></div>
 <div class="menu-trigger" id="burgerPro"><i class="fas fa-bars"></i></div>
 
 <div class="sidebar-premium" id="premiumSidebar">
@@ -357,7 +417,7 @@
     <div class="nav-item" data-nav="history"><i class="fas fa-history"></i> <span>Historial de Chats</span></div>
     <div class="nav-item" data-nav="analytics"><i class="fas fa-chart-line"></i> <span>Analytics IA</span></div>
     <div class="special-buttons">
-        <div class="vip-btn" id="vipBtn"><i class="fas fa-crown"></i> <span>Buy VIP</span></div>
+        <div class="planes-btn" id="planesBtn"><i class="fas fa-crown"></i> <span>Ver Planes</span></div>
         <div class="support-btn" id="supportBtn"><i class="fas fa-headset"></i> <span>Contact Support</span></div>
         <div class="support-email"><i class="fas fa-envelope"></i> aqirax.ai@gmail.com</div>
     </div>
@@ -386,23 +446,23 @@
 </div>
 
 <!-- Modales -->
-<div id="loginModal" class="modal"><div class="modal-card"><h3>🔐 Acceso a Aqirax</h3><input type="text" id="loginName" placeholder="Nombre"><input type="email" id="loginEmail" placeholder="Email"><input type="password" id="loginPassword" placeholder="Contraseña"><button id="doLoginBtn">Ingresar / Registrarse</button><div class="close-modal" id="closeLoginBtn">Cancelar</div></div></div>
-<div id="vipModal" class="modal"><div class="modal-card" style="text-align:center"><i class="fas fa-crown" style="font-size:2rem;color:#ffd700"></i><h2>AQIRAX VIP</h2><div style="font-size:1.8rem;margin:1rem 0">$19.99 <span style="font-size:0.9rem;">/mes</span></div><button id="closeVipModal">Cerrar</button></div></div>
+<div id="loginModal" class="modal"><div class="modal-card"><h3>🔐 Iniciar Sesión</h3><input type="email" id="loginEmail" placeholder="Email"><input type="password" id="loginPassword" placeholder="Contraseña"><button id="doLoginBtn">Ingresar</button><div class="modal-switch" id="switchToRegister" style="text-align:center; margin-top:10px; color:#aaa; cursor:pointer;">¿No tienes cuenta? Regístrate</div><div class="close-modal" id="closeLoginBtn">Cancelar</div></div></div>
+<div id="registerModal" class="modal"><div class="modal-card"><h3>📝 Registrarse</h3><input type="text" id="regName" placeholder="Nombre"><input type="email" id="regEmail" placeholder="Email"><input type="password" id="regPassword" placeholder="Contraseña"><input type="password" id="regConfirmPassword" placeholder="Confirmar Contraseña"><button id="doRegisterBtn">Registrarse</button><div class="modal-switch" id="switchToLogin" style="text-align:center; margin-top:10px; color:#aaa; cursor:pointer;">¿Ya tienes cuenta? Inicia Sesión</div><div class="close-modal" id="closeRegisterBtn">Cancelar</div></div></div>
+<div id="planesModal" class="modal"><div class="modal-card"><h3><i class="fas fa-crown"></i> Planes Aqirax</h3><div class="plan-card vip"><i class="fas fa-crown" style="color:#ffd700; font-size:1.5rem;"></i><h4 style="color:#ffd700;">VIP</h4><div class="plan-price">$19.99 <span style="font-size:0.8rem;">/mes</span></div><p>Modelos IA exclusivos, respuestas prioritarias, soporte 24/7</p></div><div class="plan-card programador"><i class="fas fa-code" style="color:#ff69b4; font-size:1.5rem;"></i><h4 style="color:#ff69b4;">Programador</h4><div class="plan-price">$14.99 <span style="font-size:0.8rem;">/mes</span></div><p>IA experta en código, depuración inteligente, snippets optimizados</p></div><button id="closePlanesBtn">Cerrar</button></div></div>
 <div id="historyModal" class="modal"><div class="modal-card"><h3>Historial de Chats</h3><div id="chatsList"></div><div class="close-modal" id="closeHistoryBtn">Cerrar</div></div></div>
 
 <script>
-    // Configuración
+    // CONSTANTES
+    const API_URL = "http://localhost:3000/api";
+    const ADMIN_EMAIL = "aqirax.ai@gmail.com";
+    const DEFAULT_SYSTEM_PROMPT = "";
+    
+    // GROQ API
     const GROQ_API_KEY = "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";
     const GROQ_MODEL = "llama-3.3-70b-versatile";
     const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-    const VIP_EMAIL = "aqirax.ai@gmail.com";
-    const DEFAULT_SYSTEM_PROMPT = "";
     
-    const USERS_KEY = "aqirax_users";
-    const SESSION_KEY = "aqirax_session";
-    const CHATS_KEY = "aqirax_chats";
-    const PREFS_KEY = "aqirax_prefs";
-    
+    // Variables globales
     let currentUser = null;
     let currentChatId = null;
     let currentMessages = [];
@@ -413,6 +473,81 @@
     let selectedTextColor = "#ffffff";
     let welcomeScreenRemoved = false;
     
+    // Base de datos local (para demostración sin servidor)
+    let localDatabase = {
+        users: {},
+        chats: {},
+        prefs: {}
+    };
+    
+    // Cargar base de datos desde localStorage
+    function loadDatabase() {
+        const saved = localStorage.getItem("aqirax_database");
+        if (saved) {
+            try {
+                localDatabase = JSON.parse(saved);
+            } catch(e) { console.error(e); }
+        }
+        if (!localDatabase.users) localDatabase.users = {};
+        if (!localDatabase.chats) localDatabase.chats = {};
+        if (!localDatabase.prefs) localDatabase.prefs = {};
+    }
+    
+    function saveDatabase() {
+        localStorage.setItem("aqirax_database", JSON.stringify(localDatabase));
+    }
+    
+    // Funciones de usuario
+    function getUsers() { return localDatabase.users; }
+    function saveUsers(users) { localDatabase.users = users; saveDatabase(); }
+    function getUserRanks(email) { return localDatabase.users[email]?.ranks || []; }
+    function hasRank(email, rank) { return getUserRanks(email).includes(rank); }
+    
+    function addRankToUser(email, rank) {
+        if (localDatabase.users[email]) {
+            if (!localDatabase.users[email].ranks) localDatabase.users[email].ranks = [];
+            if (!localDatabase.users[email].ranks.includes(rank)) localDatabase.users[email].ranks.push(rank);
+            saveDatabase();
+        }
+    }
+    
+    function removeRankFromUser(email, rank) {
+        if (localDatabase.users[email] && localDatabase.users[email].ranks) {
+            localDatabase.users[email].ranks = localDatabase.users[email].ranks.filter(r => r !== rank);
+            saveDatabase();
+        }
+    }
+    
+    function registerUser(name, email, pass) {
+        if (localDatabase.users[email]) return false;
+        localDatabase.users[email] = { name, email, password: pass, ranks: [], createdAt: new Date().toISOString() };
+        saveDatabase();
+        return true;
+    }
+    
+    function loginUser(email, pass) {
+        const user = localDatabase.users[email];
+        if (user && user.password === pass) return user;
+        return null;
+    }
+    
+    function getRankDisplayClass(ranks) {
+        if (!ranks || ranks.length === 0) return '';
+        if (ranks.includes('vip') && ranks.includes('programador')) return 'both';
+        if (ranks.includes('vip')) return 'vip';
+        if (ranks.includes('programador')) return 'programador';
+        return '';
+    }
+    
+    function getRankText(ranks) {
+        if (!ranks || ranks.length === 0) return 'Free';
+        if (ranks.includes('vip') && ranks.includes('programador')) return 'VIP/Programador';
+        if (ranks.includes('vip')) return 'VIP';
+        if (ranks.includes('programador')) return 'Programador';
+        return 'Free';
+    }
+    
+    // Funciones de UI
     function createShootingStars(count) {
         const container = document.getElementById('shootingStars');
         for (let i = 0; i < count; i++) {
@@ -431,8 +566,6 @@
         }
     }
     
-    function isVipUser(email) { return email === VIP_EMAIL; }
-    
     function removeWelcomeScreen() {
         if (!welcomeScreenRemoved) {
             const welcome = document.getElementById('welcomeScreen');
@@ -442,19 +575,125 @@
     }
     
     function updateVipStyles() {
-        const isVip = currentUser && isVipUser(currentUser.email);
+        const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+        const adminIcon = document.getElementById('adminIcon');
+        if (adminIcon) adminIcon.style.display = isAdmin ? 'flex' : 'none';
+        
         const headerUser = document.getElementById('userInfoHeader');
-        if (isVip) {
-            headerUser.classList.add('vip');
-            headerUser.innerHTML = `<i class="fas fa-crown"></i> <span>${escapeHtml(currentUser.name)} (VIP)</span>`;
-        } else if (currentUser) {
-            headerUser.classList.remove('vip');
-            headerUser.innerHTML = `<i class="fas fa-user-circle"></i> <span>${escapeHtml(currentUser.name)}</span>`;
+        if (currentUser) {
+            const ranks = getUserRanks(currentUser.email);
+            const rankClass = getRankDisplayClass(ranks);
+            headerUser.className = 'user-info-header ' + rankClass;
+            if (ranks.includes('vip') && ranks.includes('programador')) {
+                headerUser.innerHTML = `<i class="fas fa-crown"></i> <span>${escapeHtml(currentUser.name)} (VIP/Programador)</span>`;
+            } else if (ranks.includes('vip')) {
+                headerUser.innerHTML = `<i class="fas fa-crown"></i> <span>${escapeHtml(currentUser.name)} (VIP)</span>`;
+            } else if (ranks.includes('programador')) {
+                headerUser.innerHTML = `<i class="fas fa-code"></i> <span>${escapeHtml(currentUser.name)} (Programador)</span>`;
+            } else {
+                headerUser.classList.remove('vip', 'programador', 'both');
+                headerUser.innerHTML = `<i class="fas fa-user-circle"></i> <span>${escapeHtml(currentUser.name)}</span>`;
+            }
         } else {
-            headerUser.classList.remove('vip');
+            headerUser.className = 'user-info-header';
             headerUser.innerHTML = `<i class="fas fa-user-circle"></i> <span>Invitado</span>`;
         }
     }
+    
+    function updateAdminPanel() {
+        const adminContent = document.getElementById('adminContent');
+        if (!adminContent) return;
+        
+        adminContent.innerHTML = `
+            <div class="db-controls">
+                <button class="db-btn" id="exportDbBtn"><i class="fas fa-download"></i> Exportar DB</button>
+                <label class="db-btn" style="display:inline-block; cursor:pointer;"><i class="fas fa-upload"></i> Importar DB<input type="file" id="importDbInput" accept=".json" style="display:none;"></label>
+            </div>
+            <div style="margin-bottom:1rem; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:12px; font-size:0.7rem; text-align:center;">
+                <i class="fas fa-info-circle"></i> Exporta la DB, compártela con otros admins, o edítala manualmente
+            </div>
+        `;
+        
+        const users = getUsers();
+        Object.entries(users).forEach(([email, userData]) => {
+            const ranks = userData.ranks || [];
+            const div = document.createElement('div');
+            div.className = 'user-list-item';
+            div.innerHTML = `
+                <div class="user-email-admin"><i class="fas fa-envelope"></i> ${escapeHtml(email)}</div>
+                <div class="user-rank-badges">
+                    ${ranks.map(r => `<span class="rank-badge ${r}">${r === 'vip' ? '👑 VIP' : '💻 Programador'}</span>`).join('')}
+                    ${ranks.length === 0 ? '<span class="rank-badge">Free</span>' : ''}
+                </div>
+                <div class="admin-buttons">
+                    <button onclick="addRankToUserHandler('${email}', 'vip')"><i class="fas fa-crown"></i> +VIP</button>
+                    <button onclick="addRankToUserHandler('${email}', 'programador')"><i class="fas fa-code"></i> +Programador</button>
+                    ${ranks.includes('vip') ? `<button onclick="removeRankFromUserHandler('${email}', 'vip')"><i class="fas fa-trash"></i> -VIP</button>` : ''}
+                    ${ranks.includes('programador') ? `<button onclick="removeRankFromUserHandler('${email}', 'programador')"><i class="fas fa-trash"></i> -Programador</button>` : ''}
+                </div>
+            `;
+            adminContent.appendChild(div);
+        });
+        
+        document.getElementById('exportDbBtn')?.addEventListener('click', exportDatabase);
+        document.getElementById('importDbInput')?.addEventListener('change', importDatabase);
+    }
+    
+    function exportDatabase() {
+        const dataStr = JSON.stringify(localDatabase, null, 2);
+        const blob = new Blob([dataStr], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `aqirax_database_${new Date().toISOString().slice(0,19)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+    
+    function importDatabase(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const imported = JSON.parse(e.target.result);
+                localDatabase = imported;
+                saveDatabase();
+                alert("✅ Base de datos importada exitosamente");
+                if (currentUser && currentUser.email === ADMIN_EMAIL) {
+                    updateAdminPanel();
+                }
+                // Recargar usuario actual si es necesario
+                if (currentUser) {
+                    const updatedUser = localDatabase.users[currentUser.email];
+                    if (updatedUser) {
+                        currentUser = updatedUser;
+                        updateUIForUser(currentUser);
+                    }
+                }
+            } catch(err) {
+                alert("❌ Error al importar: archivo inválido");
+            }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+    }
+    
+    window.addRankToUserHandler = (email, rank) => {
+        addRankToUser(email, rank);
+        if (currentUser && currentUser.email === email) {
+            updateUIForUser(currentUser);
+        }
+        updateAdminPanel();
+    };
+    
+    window.removeRankFromUserHandler = (email, rank) => {
+        removeRankFromUser(email, rank);
+        if (currentUser && currentUser.email === email) {
+            updateUIForUser(currentUser);
+        }
+        updateAdminPanel();
+    };
     
     function applyTheme(bgColor, textColor) {
         document.body.style.backgroundColor = bgColor;
@@ -465,16 +704,15 @@
     
     function saveUserPrefs() {
         if (!currentUser) return;
-        const prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}");
-        prefs[currentUser.email] = { systemPrompt: currentSystemPrompt, bgColor: selectedBgColor, textColor: selectedTextColor };
-        localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        if (!localDatabase.prefs[currentUser.email]) localDatabase.prefs[currentUser.email] = {};
+        localDatabase.prefs[currentUser.email] = { systemPrompt: currentSystemPrompt, bgColor: selectedBgColor, textColor: selectedTextColor };
+        saveDatabase();
         applyTheme(selectedBgColor, selectedTextColor);
     }
     
     function loadUserPrefs() {
         if (!currentUser) return;
-        const prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}");
-        const userPrefs = prefs[currentUser.email];
+        const userPrefs = localDatabase.prefs[currentUser.email];
         if (userPrefs) {
             currentSystemPrompt = userPrefs.systemPrompt || DEFAULT_SYSTEM_PROMPT;
             selectedBgColor = userPrefs.bgColor || "#000000";
@@ -487,7 +725,7 @@
         const prefContent = document.getElementById('prefContent');
         if (!currentUser) {
             prefContent.innerHTML = `<div style="text-align:center;padding:2rem;color:#888;"><i class="fas fa-lock"></i><p>Inicia sesión para personalizar</p><button class="login-btn" id="prefLoginBtn" style="margin-top:1rem">Iniciar Sesión</button></div>`;
-            document.getElementById('prefLoginBtn')?.addEventListener('click', () => document.getElementById('loginModal').classList.add('active'));
+            document.getElementById('prefLoginBtn')?.addEventListener('click', () => openLoginModal());
             return;
         }
         prefContent.innerHTML = `
@@ -496,8 +734,8 @@
             <div class="pref-section"><label><i class="fas fa-font"></i> Color de Texto</label><div class="color-grid" id="textColorGrid"></div></div>
             <div class="pref-actions"><button id="savePrefsBtn"><i class="fas fa-save"></i> Guardar</button><button id="resetPrefsBtn"><i class="fas fa-undo"></i> Restablecer</button></div>
         `;
-        const bgColors = ["#000000", "#0a0a0a", "#1a1a2e", "#0d1117", "#111827", "#1e1e2f", "#0a192f", "#0f0c29", "#1a1a1a", "#2d2d2d"];
-        const textColors = ["#ffffff", "#f0f0f0", "#d4d4d4", "#a855f7", "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#ec4899", "#06b6d4", "#84cc16", "#f97316", "#8b5cf6", "#14b8a6"];
+        const bgColors = ["#000000", "#0a0a0a", "#1a1a2e", "#0d1117", "#111827", "#1e1e2f", "#0a192f", "#0f0c29"];
+        const textColors = ["#ffffff", "#f0f0f0", "#d4d4d4", "#a855f7", "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#ec4899", "#06b6d4"];
         const bgGrid = document.getElementById('bgColorGrid');
         bgColors.forEach(c => {
             const div = document.createElement('div');
@@ -539,7 +777,6 @@
         return processed;
     }
     
-    // Animación de escritura letra por letra
     async function animateTyping(text, targetElement, speed = 12) {
         targetElement.innerHTML = '';
         for (let i = 0; i < text.length; i++) {
@@ -621,8 +858,8 @@
     
     function stopResponse() { if (currentAbortController) { currentAbortController.abort(); currentAbortController = null; } isWaitingResponse = false; document.getElementById('typingIndicator')?.remove(); document.getElementById('stopBtn').style.display = 'none'; document.getElementById('sendMsgBtn').style.display = 'flex'; }
     
-    function getStoredChats() { if (!currentUser) return []; const all = JSON.parse(localStorage.getItem(CHATS_KEY) || "{}"); return all[currentUser.email] || []; }
-    function saveAllChats(chats) { if (!currentUser) return; const all = JSON.parse(localStorage.getItem(CHATS_KEY) || "{}"); all[currentUser.email] = chats; localStorage.setItem(CHATS_KEY, JSON.stringify(all)); }
+    function getStoredChats() { if (!currentUser) return []; return localDatabase.chats[currentUser.email] || []; }
+    function saveAllChats(chats) { if (!currentUser) return; localDatabase.chats[currentUser.email] = chats; saveDatabase(); }
     function saveCurrentChat() { if (!currentUser || !currentChatId) return; const chats = getStoredChats(); const idx = chats.findIndex(c => c.id === currentChatId); const title = currentMessages[0]?.content?.substring(0, 50) || "Nueva conversación"; const chatData = { id: currentChatId, title, date: new Date().toISOString(), messages: [...currentMessages] }; if (idx >= 0) chats[idx] = chatData; else chats.push(chatData); saveAllChats(chats); }
     function createNewChat(keepWelcome = false) { 
         currentChatId = Date.now().toString(); currentMessages = []; 
@@ -637,58 +874,78 @@
         }
         if (currentUser) saveCurrentChat(); 
     }
-    function loadChat(chatId) { removeWelcomeScreen(); const chat = getStoredChats().find(c => c.id === chatId); if (chat) { currentChatId = chat.id; currentMessages = [...chat.messages]; document.getElementById('chatContainer').innerHTML = ''; currentMessages.forEach(msg => { const div = document.createElement('div'); div.className = `msg ${msg.role === 'user' ? 'user' : 'bot'}`; div.innerHTML = `<div class="avatar-icon"><i class="fas ${msg.role === 'user' ? 'fa-user-astronaut' : 'fa-microchip'}"></i></div><div class="bubble-text">${processAndHighlightCode(msg.content)}</div>`; document.getElementById('chatContainer').appendChild(div); div.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block)); }); scrollChatSmooth(); } }
+    function loadChat(chatId) { removeWelcomeScreen(); const chats = getStoredChats(); const chat = chats.find(c => c.id === chatId); if (chat) { currentChatId = chat.id; currentMessages = [...chat.messages]; document.getElementById('chatContainer').innerHTML = ''; currentMessages.forEach(msg => { const div = document.createElement('div'); div.className = `msg ${msg.role === 'user' ? 'user' : 'bot'}`; div.innerHTML = `<div class="avatar-icon"><i class="fas ${msg.role === 'user' ? 'fa-user-astronaut' : 'fa-microchip'}"></i></div><div class="bubble-text">${processAndHighlightCode(msg.content)}</div>`; document.getElementById('chatContainer').appendChild(div); div.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block)); }); scrollChatSmooth(); } }
     function showHistoryModal() { if (!currentUser) { appendMessageWithTyping("🔐 Inicia sesión para ver tu historial.", false); return; } const chats = getStoredChats(); const listDiv = document.getElementById('chatsList'); if (chats.length === 0) listDiv.innerHTML = '<div style="text-align:center;color:#888;">No hay conversaciones</div>'; else { listDiv.innerHTML = chats.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(chat => `<div class="chat-item" data-id="${chat.id}"><div class="chat-date">${new Date(chat.date).toLocaleString()}</div><div class="chat-preview">${escapeHtml(chat.title)}</div></div>`).join(''); document.querySelectorAll('.chat-item').forEach(el => el.addEventListener('click', () => { loadChat(el.dataset.id); document.getElementById('historyModal').classList.remove('active'); })); } document.getElementById('historyModal').classList.add('active'); }
     
-    // Auth
-    function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || "{}"); }
-    function saveUsers(users) { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
-    function registerUser(name, email, pass) { const users = getUsers(); if (users[email]) return false; users[email] = { name, email, password: pass }; saveUsers(users); return true; }
-    function loginUser(email, pass) { const users = getUsers(); const u = users[email]; if (u && u.password === pass) return u; return null; }
+    function openLoginModal() { document.getElementById('loginModal').classList.add('active'); }
     
     function updateUIForUser(user) {
         if (user) {
-            const isVip = isVipUser(user.email);
-            document.getElementById('userInfoArea').innerHTML = `<div class="user-info"><div class="user-avatar"><i class="fas ${isVip ? 'fa-crown' : 'fa-user-check'}"></i></div><div class="user-details"><div class="user-name">${escapeHtml(user.name)}</div><div class="user-email">${escapeHtml(user.email)}</div><div class="user-rank ${isVip ? 'vip' : ''}">${isVip ? '<i class="fas fa-crown"></i> Rango: VIP' : 'Rango: Free'}</div></div></div><button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>`;
+            const ranks = getUserRanks(user.email);
+            const rankClass = getRankDisplayClass(ranks);
+            document.getElementById('userInfoArea').innerHTML = `<div class="user-info"><div class="user-avatar"><i class="fas ${ranks.includes('vip') ? 'fa-crown' : (ranks.includes('programador') ? 'fa-code' : 'fa-user-check')}"></i></div><div class="user-details"><div class="user-name">${escapeHtml(user.name)}</div><div class="user-email">${escapeHtml(user.email)}</div><div class="user-rank ${rankClass}">${getRankText(ranks)}</div></div></div><button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>`;
             document.getElementById('logoutBtn')?.addEventListener('click', performLogout);
             loadUserPrefs();
             updatePreferencesUI();
         } else {
-            document.getElementById('userInfoArea').innerHTML = `<div class="user-info"><div class="user-avatar"><i class="fas fa-user"></i></div><div class="user-details"><div class="user-name">Invitado</div><div class="user-email">No autenticado</div><div class="user-rank">Rango: Free</div></div></div><button class="login-btn" id="openLoginBtn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>`;
-            document.getElementById('openLoginBtn')?.addEventListener('click', () => document.getElementById('loginModal').classList.add('active'));
+            document.getElementById('userInfoArea').innerHTML = `<div class="user-info"><div class="user-avatar"><i class="fas fa-user"></i></div><div class="user-details"><div class="user-name">Invitado</div><div class="user-email">No autenticado</div><div class="user-rank">Free</div></div></div><button class="login-btn" id="openLoginBtn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>`;
+            document.getElementById('openLoginBtn')?.addEventListener('click', openLoginModal);
             applyTheme("#000000", "#ffffff");
         }
         updateVipStyles();
         updatePreferencesUI();
     }
     
-    function performLogout() { currentUser = null; currentChatId = null; currentMessages = []; localStorage.removeItem(SESSION_KEY); updateUIForUser(null); createNewChat(false); welcomeScreenRemoved = false; }
+    function performLogout() { currentUser = null; currentChatId = null; currentMessages = []; localStorage.removeItem('aqirax_session'); updateUIForUser(null); createNewChat(false); welcomeScreenRemoved = false; }
     
     function doLogin() {
-        const name = document.getElementById('loginName').value.trim();
         const email = document.getElementById('loginEmail').value.trim();
         const pass = document.getElementById('loginPassword').value;
         if (!email || !pass) { alert("Completa todos los campos"); return; }
-        let user = loginUser(email, pass);
-        if (!user) {
-            const finalName = name || email.split('@')[0];
-            if (registerUser(finalName, email, pass)) {
-                user = loginUser(email, pass);
-                alert("✅ ¡Registro exitoso! Bienvenido a Aqirax AI");
-            } else { alert("❌ Error al registrar"); return; }
-        } else { alert(`✅ Bienvenido de vuelta, ${user.name}`); }
+        const user = loginUser(email, pass);
+        if (!user) { alert("❌ Credenciales incorrectas o usuario no existe"); return; }
         currentUser = user;
-        localStorage.setItem(SESSION_KEY, JSON.stringify({ email: user.email }));
+        localStorage.setItem('aqirax_session', JSON.stringify({ email: user.email }));
         updateUIForUser(currentUser);
         document.getElementById('loginModal').classList.remove('active');
         createNewChat(false);
         welcomeScreenRemoved = false;
-        document.getElementById('loginName').value = "";
         document.getElementById('loginEmail').value = "";
         document.getElementById('loginPassword').value = "";
+        if (user.email === ADMIN_EMAIL) updateAdminPanel();
     }
     
-    function checkSavedSession() { const session = localStorage.getItem(SESSION_KEY); if (session) { const { email } = JSON.parse(session); const users = getUsers(); const user = users[email]; if (user) { currentUser = user; updateUIForUser(currentUser); createNewChat(false); } else updateUIForUser(null); } else updateUIForUser(null); }
+    function doRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const pass = document.getElementById('regPassword').value;
+        const confirmPass = document.getElementById('regConfirmPassword').value;
+        if (!name || !email || !pass) { alert("Completa todos los campos"); return; }
+        if (pass !== confirmPass) { alert("❌ Las contraseñas no coinciden"); return; }
+        if (registerUser(name, email, pass)) {
+            alert("✅ Registro exitoso. Ahora inicia sesión.");
+            document.getElementById('registerModal').classList.remove('active');
+            openLoginModal();
+        } else { alert("❌ El email ya está registrado"); }
+        document.getElementById('regName').value = "";
+        document.getElementById('regEmail').value = "";
+        document.getElementById('regPassword').value = "";
+        document.getElementById('regConfirmPassword').value = "";
+    }
+    
+    function checkSavedSession() { 
+        const session = localStorage.getItem('aqirax_session');
+        if (session) {
+            const { email } = JSON.parse(session);
+            const user = localDatabase.users[email];
+            if (user) { 
+                currentUser = user;
+                updateUIForUser(currentUser);
+                createNewChat(false);
+                if (user.email === ADMIN_EMAIL) updateAdminPanel();
+            } else updateUIForUser(null);
+        } else updateUIForUser(null);
+    }
     
     // Eventos
     let isSidebarOpen = false;
@@ -698,17 +955,23 @@
     document.getElementById('sendMsgBtn').onclick = sendUserMessage;
     document.getElementById('stopBtn').onclick = stopResponse;
     document.getElementById('globalInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendUserMessage(); });
-    document.getElementById('vipBtn').onclick = () => document.getElementById('vipModal').classList.add('active');
-    document.getElementById('closeVipModal').onclick = () => document.getElementById('vipModal').classList.remove('active');
-    document.getElementById('closeHistoryBtn').onclick = () => document.getElementById('historyModal').classList.remove('active');
-    document.getElementById('closeLoginBtn').onclick = () => document.getElementById('loginModal').classList.remove('active');
-    document.getElementById('doLoginBtn').onclick = doLogin;
+    document.getElementById('planesBtn').onclick = () => document.getElementById('planesModal').classList.add('active');
+    document.getElementById('closePlanesBtn').onclick = () => document.getElementById('planesModal').classList.remove('active');
     document.getElementById('supportBtn').onclick = () => window.open('mailto:aqirax.ai@gmail.com', '_blank');
     document.getElementById('settingsBtn').onclick = () => { updatePreferencesUI(); document.getElementById('preferencesMenu').classList.toggle('open'); };
+    document.getElementById('adminIcon').onclick = () => { updateAdminPanel(); document.getElementById('adminMenu').classList.toggle('open'); };
+    document.getElementById('closeHistoryBtn').onclick = () => document.getElementById('historyModal').classList.remove('active');
+    document.getElementById('closeLoginBtn').onclick = () => document.getElementById('loginModal').classList.remove('active');
+    document.getElementById('closeRegisterBtn').onclick = () => document.getElementById('registerModal').classList.remove('active');
+    document.getElementById('doLoginBtn').onclick = doLogin;
+    document.getElementById('doRegisterBtn').onclick = doRegister;
+    document.getElementById('switchToRegister').onclick = () => { document.getElementById('loginModal').classList.remove('active'); document.getElementById('registerModal').classList.add('active'); };
+    document.getElementById('switchToLogin').onclick = () => { document.getElementById('registerModal').classList.remove('active'); openLoginModal(); };
     
     document.querySelectorAll('.nav-item').forEach(item => { item.onclick = () => { const type = item.dataset.nav; if (type === 'newchat') createNewChat(false); if (type === 'history') showHistoryModal(); if (type === 'analytics') appendMessageWithTyping("📊 Análisis Aqirax: +245 interacciones hoy. Tasa de satisfacción 96%.", false); if (isSidebarOpen && window.innerWidth <= 800) toggleSidebar(); }; });
     
     window.addEventListener('load', () => {
+        loadDatabase();
         createShootingStars(25);
         setTimeout(() => {
             document.getElementById('preloader').classList.add('fade-out');
