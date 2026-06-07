@@ -453,8 +453,7 @@
 
 <script>
     // CONSTANTES
-    const API_URL = "http://localhost:3000/api";
-    const ADMIN_EMAIL = "aqirax.ai@gmail.com";
+    const ADMIN_EMAILS = ["aqirax.ai@gmail.com", "ctabordabaute@gmail.com", "carlos_taborda@hotmail.com"];
     const DEFAULT_SYSTEM_PROMPT = "";
     
     // GROQ API
@@ -473,12 +472,20 @@
     let selectedTextColor = "#ffffff";
     let welcomeScreenRemoved = false;
     
-    // Base de datos local (para demostración sin servidor)
+    // Base de datos local
     let localDatabase = {
         users: {},
         chats: {},
         prefs: {}
     };
+    
+    // Función para obtener rangos predeterminados según el email
+    function getDefaultRanks(email) {
+        if (ADMIN_EMAILS.includes(email)) {
+            return ["vip", "programador"];
+        }
+        return [];
+    }
     
     // Cargar base de datos desde localStorage
     function loadDatabase() {
@@ -520,14 +527,36 @@
     
     function registerUser(name, email, pass) {
         if (localDatabase.users[email]) return false;
-        localDatabase.users[email] = { name, email, password: pass, ranks: [], createdAt: new Date().toISOString() };
+        const defaultRanks = getDefaultRanks(email);
+        localDatabase.users[email] = { 
+            name, 
+            email, 
+            password: pass, 
+            ranks: defaultRanks,
+            createdAt: new Date().toISOString() 
+        };
         saveDatabase();
         return true;
     }
     
     function loginUser(email, pass) {
         const user = localDatabase.users[email];
-        if (user && user.password === pass) return user;
+        if (user && user.password === pass) {
+            // Verificar si el usuario tiene los rangos correctos según su email (en caso de que se hayan perdido)
+            const expectedRanks = getDefaultRanks(email);
+            let needsUpdate = false;
+            if (expectedRanks.length > 0) {
+                if (!user.ranks) user.ranks = [];
+                expectedRanks.forEach(rank => {
+                    if (!user.ranks.includes(rank)) {
+                        user.ranks.push(rank);
+                        needsUpdate = true;
+                    }
+                });
+                if (needsUpdate) saveDatabase();
+            }
+            return user;
+        }
         return null;
     }
     
@@ -545,6 +574,10 @@
         if (ranks.includes('vip')) return 'VIP';
         if (ranks.includes('programador')) return 'Programador';
         return 'Free';
+    }
+    
+    function isAdmin(email) {
+        return ADMIN_EMAILS.includes(email);
     }
     
     // Funciones de UI
@@ -575,9 +608,9 @@
     }
     
     function updateVipStyles() {
-        const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+        const isUserAdmin = currentUser && isAdmin(currentUser.email);
         const adminIcon = document.getElementById('adminIcon');
-        if (adminIcon) adminIcon.style.display = isAdmin ? 'flex' : 'none';
+        if (adminIcon) adminIcon.style.display = isUserAdmin ? 'flex' : 'none';
         
         const headerUser = document.getElementById('userInfoHeader');
         if (currentUser) {
@@ -610,17 +643,18 @@
                 <label class="db-btn" style="display:inline-block; cursor:pointer;"><i class="fas fa-upload"></i> Importar DB<input type="file" id="importDbInput" accept=".json" style="display:none;"></label>
             </div>
             <div style="margin-bottom:1rem; padding:0.5rem; background:rgba(255,255,255,0.05); border-radius:12px; font-size:0.7rem; text-align:center;">
-                <i class="fas fa-info-circle"></i> Exporta la DB, compártela con otros admins, o edítala manualmente
+                <i class="fas fa-info-circle"></i> Los correos administradores tienen automáticamente VIP+Programador
             </div>
         `;
         
         const users = getUsers();
         Object.entries(users).forEach(([email, userData]) => {
             const ranks = userData.ranks || [];
+            const isAdminUser = isAdmin(email);
             const div = document.createElement('div');
             div.className = 'user-list-item';
             div.innerHTML = `
-                <div class="user-email-admin"><i class="fas fa-envelope"></i> ${escapeHtml(email)}</div>
+                <div class="user-email-admin"><i class="fas fa-envelope"></i> ${escapeHtml(email)} ${isAdminUser ? '<span style="color:#ffd700;">👑 ADMIN</span>' : ''}</div>
                 <div class="user-rank-badges">
                     ${ranks.map(r => `<span class="rank-badge ${r}">${r === 'vip' ? '👑 VIP' : '💻 Programador'}</span>`).join('')}
                     ${ranks.length === 0 ? '<span class="rank-badge">Free</span>' : ''}
@@ -660,10 +694,9 @@
                 localDatabase = imported;
                 saveDatabase();
                 alert("✅ Base de datos importada exitosamente");
-                if (currentUser && currentUser.email === ADMIN_EMAIL) {
+                if (currentUser && isAdmin(currentUser.email)) {
                     updateAdminPanel();
                 }
-                // Recargar usuario actual si es necesario
                 if (currentUser) {
                     const updatedUser = localDatabase.users[currentUser.email];
                     if (updatedUser) {
@@ -899,7 +932,7 @@
     function performLogout() { currentUser = null; currentChatId = null; currentMessages = []; localStorage.removeItem('aqirax_session'); updateUIForUser(null); createNewChat(false); welcomeScreenRemoved = false; }
     
     function doLogin() {
-        const email = document.getElementById('loginEmail').value.trim();
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
         const pass = document.getElementById('loginPassword').value;
         if (!email || !pass) { alert("Completa todos los campos"); return; }
         const user = loginUser(email, pass);
@@ -912,18 +945,18 @@
         welcomeScreenRemoved = false;
         document.getElementById('loginEmail').value = "";
         document.getElementById('loginPassword').value = "";
-        if (user.email === ADMIN_EMAIL) updateAdminPanel();
+        if (isAdmin(user.email)) updateAdminPanel();
     }
     
     function doRegister() {
         const name = document.getElementById('regName').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
+        let email = document.getElementById('regEmail').value.trim().toLowerCase();
         const pass = document.getElementById('regPassword').value;
         const confirmPass = document.getElementById('regConfirmPassword').value;
         if (!name || !email || !pass) { alert("Completa todos los campos"); return; }
         if (pass !== confirmPass) { alert("❌ Las contraseñas no coinciden"); return; }
         if (registerUser(name, email, pass)) {
-            alert("✅ Registro exitoso. Ahora inicia sesión.");
+            alert("✅ Registro exitoso. ¡Bienvenido a Aqirax!");
             document.getElementById('registerModal').classList.remove('active');
             openLoginModal();
         } else { alert("❌ El email ya está registrado"); }
@@ -942,7 +975,7 @@
                 currentUser = user;
                 updateUIForUser(currentUser);
                 createNewChat(false);
-                if (user.email === ADMIN_EMAIL) updateAdminPanel();
+                if (isAdmin(user.email)) updateAdminPanel();
             } else updateUIForUser(null);
         } else updateUIForUser(null);
     }
